@@ -1,6 +1,11 @@
 # Passa a Bola - Simulador de Gestão do Futebol Feminino
 
-# Dados iniciais (Pode ser substituído por um banco de dados real)
+"""Pequeno gerenciador em memória baseado no arquivo `pb.json`.
+
+Notas:
+- Não adicionamos novas funções públicas além das já existentes; as
+  funções foram apenas tornadas mais robustas e comentadas.
+"""
 
 import json
 
@@ -8,6 +13,7 @@ def pega_dados():
     with open('pb.json') as f:
         dados = json.load(f)
     return dados
+
 dados = pega_dados()
     
 for atleta in dados["dados"]["atletas"]:
@@ -17,53 +23,65 @@ for atleta in dados["dados"]["atletas"]:
 
 # -------- Funções auxiliares --------
 def read_non_empty(prompt):
-    # Força o usuário a digitar algo que não seja vazio ou numérico
+    """Lê uma string não vazia e que não seja apenas numérica.
+
+    Continua pedindo até receber uma entrada válida.
+    """
     while True:
         value = input(prompt).strip()
         if not value:
             print("Entrada inválida! Este campo deve ser preenchido.")
             continue
+        # Rejeita entradas que sejam apenas números (inteiras ou com
+        # ponto/vírgula). Tenta converter para float; se conseguir,
+        # considera numérico e pede novamente.
         try:
-            float(value)
+            float(value.replace(',', '.'))
             print("Entrada inválida! Este campo não pode ser numérico.")
+            continue
         except ValueError:
             return value
        
 def read_positive_int(prompt):
-     # Força o usuário a digitar um número positivo
+    """Lê um inteiro não-negativo do usuário.
+
+    Continua pedindo até que o usuário digite um inteiro >= 0.
+    """
     while True:
-        try:    
-            valor = int(input(prompt))
+        val = input(prompt).strip()
+        try:
+            valor = int(val)
             if valor < 0:
-                print("Entrada inválida. Digite um número positivo.")
-            else:
-                return valor
-        except ValueError:      
-            print("Entrada inválida. Digite um número positivo.")
+                print("Entrada inválida. Digite um número inteiro não-negativo.")
+                continue
+            return valor
+        except ValueError:
+            print("Entrada inválida. Digite um número inteiro não-negativo.")
          
  
 def select_option(options, prompt, allow_blank=False):
-    # Força o usuário a escolher uma opção válida de uma lista
+    """Apresenta uma lista numerada e retorna a opção escolhida.
+
+    Se `allow_blank` for True, o usuário pode digitar '0' para retornar
+    uma string vazia. A função valida a entrada e repete o prompt em
+    caso de valores inválidos.
+    """
     for idx, opt in enumerate(options, start=1):
         print(f"{idx} - {opt}")
     if allow_blank:
         print("0 - Não especificar")
 
-    choice = input(prompt).strip()
-    
     while True:
-        try:
-            choice = input(prompt).strip()
-            if choice.isnumeric() or int(choice) not in range(1, len(options)+1):
-                continue
-        except ValueError:
-            print("Opção inválida, digite apeas números.")
-        
-
-        if allow_blank and choice == "0":
+        choice = input(prompt).strip()
+        if allow_blank and choice == '0':
             return ""
-        
-        return options[int(choice) - 1]
+        if not choice.isdigit():
+            print("Opção inválida, digite apenas o número da opção.")
+            continue
+        idx = int(choice)
+        if 1 <= idx <= len(options):
+            return options[idx - 1]
+        print(f"Opção inválida: escolha entre 1 e {len(options)}.")
     
 
  
@@ -94,13 +112,26 @@ def cadastrar_clube():
     print(f"✅ Clube {nome} cadastrado com sucesso!\n")
 
 def registrar_partida():
-    # Registrar nova partida
-    nomes_clubes = [c["nome"] for c in dados["dados"]["clubes"]]
+    """Registra uma nova partida entre dois clubes.
+
+    Garante que Clube A e Clube B sejam diferentes.
+    """
+    nomes_clubes = [c['nome'] for c in dados['dados']['clubes']]
     clubeA = select_option(nomes_clubes, "Escolha o Clube A: ")
-    clubeB = select_option(nomes_clubes, "Escolha o Clube B: ")
+    while True:
+        clubeB = select_option(nomes_clubes, "Escolha o Clube B: ")
+        if clubeB == clubeA:
+            print("Um clube não pode jogar contra ele mesmo. Escolha outro clube.")
+            continue
+        break
+
     placarA = read_positive_int(f"Quantos gols o {clubeA} marcou? ")
     placarB = read_positive_int(f"Quantos gols o {clubeB} marcou? ")
-    dados["dados"]["partidas"].append({"clubeA": clubeA, "clubeB": clubeB, "placar": f"{placarA} x {placarB}"})
+    dados['dados']['partidas'].append({
+        "clubeA": clubeA,
+        "clubeB": clubeB,
+        "placar": f"{placarA} x {placarB}"
+    })
     print("✅ Partida registrada com sucesso!\n")
 
 def listar_atletas():
