@@ -1,0 +1,138 @@
+{
+    "dados": {
+        "POSITIONS": [
+            "Goleira",
+            "Zagueira",
+            "Lateral",
+            "Volante",
+            "Meia",
+            "Atacante",
+            "Ponta"
+        ],
+
+        "partidas": [
+            {
+                "clubeA": "Corinthians",
+                "clubeB": "Flamengo",
+                "placar": "2 x 1"
+            },
+            {
+                "clubeA": "Palmeiras",
+                "clubeB": "Santos",
+                "placar": "0 x 0"
+            },
+            {
+                "clubeA": "Internacional",
+                "clubeB": "São Paulo",
+                "placar": "1 x 3"
+            },
+            {
+                "clubeA": "Corinthians",
+                "clubeB": "Palmeiras",
+                "placar": "1 x 2"
+            }
+        ],
+
+        "clubes": [
+            {
+                "nome": "Corinthians",
+                "cidade": "(exemplo)",
+                "atletas": []
+            },
+            {
+                "nome": "Flamengo",
+                "cidade": "(exemplo)",
+                "atletas": []
+            },
+            {
+                "nome": "Palmeiras",
+                "cidade": "(exemplo)",
+                "atletas": []
+            },
+            {
+                "nome": "Santos",
+                "cidade": "(exemplo)",
+                "atletas": []
+            },
+            {
+                "nome": "Internacional",
+                "cidade": "(exemplo)",
+                "atletas": []
+            },
+            {
+                "nome": "São Paulo",
+                "cidade": "(exemplo)",
+                "atletas": []
+            }
+        ],
+        
+        "atletas": [
+            {
+                "nome": "Ana",
+                "idade": 24,
+                "posicao": "Meia",
+                "clube": "Corinthians"
+            },
+            {
+                "nome": "Bia",
+                "idade": 22,
+                "posicao": "Atacante",
+                "clube": "Corinthians"
+            },
+            {
+                "nome": "Carla",
+                "idade": 27,
+                "posicao": "Zagueira",
+                "clube": "Flamengo"
+            },
+            {
+                "nome": "Dani",
+                "idade": 21,
+                "posicao": "Goleira",
+                "clube": "Flamengo"
+            },
+            {
+                "nome": "Ela",
+                "idade": 26,
+                "posicao": "Lateral",
+                "clube": "Palmeiras"
+            },
+            {
+                "nome": "Fabi",
+                "idade": 23,
+                "posicao": "Volante",
+                "clube": "Palmeiras"
+            },
+            {
+                "nome": "Gabi",
+                "idade": 28,
+                "posicao": "Atacante",
+                "clube": "Santos"
+            },
+            {
+                "nome": "Hana",
+                "idade": 20,
+                "posicao": "Meia",
+                "clube": "Santos"
+            },
+            {
+                "nome": "Iara",
+                "idade": 25,
+                "posicao": "Ponta",
+                "clube": "Corinthians"
+            },
+            {
+                "nome": "Jo",
+                "idade": 19,
+                "posicao": "Meia",
+                "clube": "Flamengo"
+            },
+            {
+                "nome": "Karla",
+                "idade": 30,
+                "posicao": "Zagueira",
+                "clube": "Palmeiras"
+            }
+        ]
+    }
+}
