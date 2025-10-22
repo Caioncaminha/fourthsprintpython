@@ -29,7 +29,7 @@ Os dados estão agrupados sob a chave `dados` e usam as seguintes estruturas:
 - `partidas`: lista de objetos com a estrutura:
   - `clubeA` (string)
   - `clubeB` (string)
-  - `placar` (string no formato "<golsA> x <golsB>")
+  - `placar` (string no formato "golsA x golsB")
 
 No início da execução, `main.py` sincroniza os atletas (cada atleta cujo campo `clube` corresponde ao nome de um clube tem seu nome adicionado à lista `atletas` do respectivo clube).
 
